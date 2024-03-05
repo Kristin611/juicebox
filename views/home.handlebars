@@ -1,0 +1,40 @@
+{{#if images}}
+<style>
+   .site-logo img {
+    width: 0px;
+    height: 0px;
+
+   }
+</style>
+{{else}}
+<style>
+    .site-logo img {
+    width: 150px;
+    height: auto;  
+    }
+</style>
+{{/if}}
+
+<section class="home">
+    <div class="formcontainer">
+        <form class="form" action="http://localhost:3001/api/images" method="post" enctype="multipart/form-data">
+            <label class="upload" for="upload">Upload</label>
+            <input type="file" id="upload" name="upload">
+            <input class="submit" type="submit" value="Submit">
+        </form>
+    </div>
+
+<section class="homecontainer">
+    {{#each images as |image| }}
+    <div class="content">
+    <span class="imagecontainer">
+        <img class='homeimage' src='/images/{{image.filename}}' alt="image">
+    </span>
+    <div>
+        {{image.user.user}}
+    </div>
+    </div>
+    {{/each}}
+</section>
+<script src="/js/logout.js"></script>
+</section>
