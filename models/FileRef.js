@@ -16,7 +16,7 @@ FileRef.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         }
     },
     {
