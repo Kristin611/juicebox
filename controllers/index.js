@@ -17,3 +17,5 @@ router.get('/:filename', async (req, res) => {
 router.use((req, res) => {
     res.send('<h1>Wrong route.<h1>')
 });
+
+module.exports = router; 

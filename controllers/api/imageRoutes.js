@@ -26,6 +26,7 @@ const fileFilter = (req, file, cb) => {
     } else {
         //reject the file
         cb(null, false)
+        cb(new Error('File type is not accepted. Only JPEG, PNG, and GIF images are allowed.'));
     }
 };
 
@@ -40,13 +41,33 @@ router.post('/', upload.single('upload'), async (req, res) => {
             filename: req.file.filename,
             uuid: req.uuid
         })
+
         res.render('fileUploadedView', {
             data: newFile
         })
+
     } catch (error) {
         res.status(500).json(error)
     }
+});
+
+router.post('/images', upload.single('upload'), (req, res) => {
+    upload(req, res, async (err) => {
+        try {
+            if (err instanceof multer.MulterError) {
+                return res.redirect('/')
+            } else if (err) {
+                return res.status(500).json(err)
+            }
+
+
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    })
 })
+
+module.exports = router;
 
 //1. This code configures the storage engine for Multer using multer.diskStorage(). It specifies the destination directory where uploaded files will be stored ('public/images/') and specifies how the file should be named using the filename function. Inside the filename function, it generates a unique filename using uuidv4(), slices a portion of the UUID to create a shorter filename, and determines the file extension using the mimeResolve function, which is defined in utils/fileExt.js.
 

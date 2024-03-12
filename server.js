@@ -10,7 +10,7 @@ const routes = require('./controllers');
 //route handlers for various endpoints in web app
 const helpers = require('./utils/helpers');
 
-//const sequelize = require('./config/connection');
+const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 //sequelize is a promise-based Node.js ORM library forf interacting with relational databases like MySQL, PostgreSQL, SQLite, etc. the sequelize object is used to define models and perform database operations
 
