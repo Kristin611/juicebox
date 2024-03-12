@@ -30,3 +30,16 @@ router.get('/', withAuth, async (req, res) => {
         res.status(500).json(error);
     }
 });
+
+//Check if user is logged in
+router.get('/login', (req, res) => {
+    //If user is already logged in, redirect the request to home route
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    //if user is not logged in, then (else) login page is rendered for user to log in. 
+    res.render('login');
+});
+
+module.exports = router;
