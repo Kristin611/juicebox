@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
+
 let sequelize;
 
 //the code above sets up the initial environment for using the Sequelize library by importing the sequelize module and configuring environment variables using dotenv. It also declares a variable sequelize which will likely be used to establish a database connection later in the code.
