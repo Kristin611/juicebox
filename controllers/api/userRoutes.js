@@ -27,11 +27,11 @@ router.post('/login', async (req, res) => {
             where: {username: req.body.username}
         });
         if (!existingUser) {
-            res.status(404).json({message: 'invalid username'})
+            return res.status(404).json({message: 'invalid username'})
         };
         const validPW = await existingUser.checkPassword(req.body.password)
         if (!validPW) {
-            res.status(404).json({message: 'invalid password'})
+            return res.status(404).json({message: 'invalid password'})
         }
 
         req.session.save(() => {
@@ -41,7 +41,8 @@ router.post('/login', async (req, res) => {
             return res.json({existingUser, message: 'You are logged in!'})
         })
     } catch (error) {
-        return res.status(500).json(error)
+        console.error('Login error:', error);
+        return res.status(500).json(error);
     }
 });
 
